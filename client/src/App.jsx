@@ -1,12 +1,14 @@
 import React, {useState,useEffect} from "react";
 import axios from 'axios';
+import './App.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 export default function App(){
     const[details,setDetails] = useState([]);
     const[form, setForm] = useState({sname:'',address:'',email:'',dept:'',description:''});
 
     const fetchData = async()=>{
-        const rs = await axios.get('http://localhost:5000/all');
+        const rs = await axios.get(`${API_URL}/all`);
         setDetails(rs.data);
     };
 
@@ -14,7 +16,7 @@ export default function App(){
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
-        await axios.post('http://localhost:5000/add',form);
+        await axios.post(`${API_URL}/add`,form);
         setForm({sname:'',address:'',email:'',dept:'',description:''});
         fetchData();
     }
