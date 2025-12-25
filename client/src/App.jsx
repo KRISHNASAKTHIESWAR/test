@@ -1,8 +1,7 @@
 import React, {useState,useEffect} from "react";
 import axios from 'axios';
-import './App.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL;
 export default function App(){
     const[details,setDetails] = useState([]);
     const[form, setForm] = useState({sname:'',address:'',email:'',dept:'',description:''});
@@ -30,11 +29,6 @@ export default function App(){
             <input placeholder="Address" value={form.address} onChange={e=>setForm({...form,address:e.target.value})}/>
             <input placeholder="Email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})}/>
             <input placeholder="Dept" value={form.dept} onChange={e=>setForm({...form,dept:e.target.value})}/>
-            <select className="filter" value={form.dept}>
-                <option value="CSE" onChange={(e)=>setForm(e.target.value)}>CSE</option>
-                <option value="IT" onChange={(e)=>setForm(e.target.value)}>IT</option>
-                <option value="AIDS" onChange={(e)=>setForm(e.target.value)}>AIDS</option> 
-            </select>
             <input placeholder="Description" value={form.description} onChange={e=>setForm({...form,description:e.target.value})}/>
             <button>Submit</button>
         </form>
